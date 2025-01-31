@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     # Checkout del repository
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v1
 
     # Configura Python versione 3.7
     - name: Set up Python 3.7
