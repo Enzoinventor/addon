@@ -21,6 +21,9 @@ jobs:
 
     - name: Update domains
       run: python tools/updateDomains.py
+    # Esegui il pull delle modifiche dal repository remoto
+    - name: Pull latest changes
+      run: git pull origin master
 
     - name: Commit & Push changes
       uses: actions-js/push@master
