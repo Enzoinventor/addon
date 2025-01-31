@@ -8,27 +8,23 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-    # Checkout del repository
-    - uses: actions/checkout@v1
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
 
-    # Configura Python versione 3.7
-    - name: Set up Python 3.7
-      uses: actions/setup-python@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
       with:
-        python-version: '3.7'
+        python-version: 3.7
 
-    # Installa le dipendenze
     - name: Install dependencies
       run: pip install requests
 
-    # Esegui lo script di aggiornamento dei domini
     - name: Update domains
       run: python tools/updateDomains.py
 
-    # Commit e push delle modifiche
     - name: Commit & Push changes
-      uses: ad-m/github-push-action@v0.6.0
+      uses: actions-js/push@master
       with:
         message: "Aggiornamento domini"
         branch: "master"
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.API_TOKEN_GITHUB || github.token }}
